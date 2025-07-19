@@ -16,8 +16,12 @@ fun PodcastNavigation(
         navController = navController,
         startDestination = startDestination
     ){
-        composable(route = Screen.PodcastsList.route) {
-            PodcastListScreen()
+        composable(route = Screen.PodcastList.route) {
+            PodcastListScreen(
+                onNavigateToDetails = {
+                    navController.navigate(Screen.PodcastDetail.route)
+                }
+            )
         }
         composable(route = Screen.PodcastDetail.route) {
             PodcastDetailScreen()

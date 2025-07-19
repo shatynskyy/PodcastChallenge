@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     PodcastNavigation(
                         navController = navController,
-                        startDestination = Screen.PodcastsList.route
+                        startDestination = Screen.PodcastList.route
                     )
                 }
             }

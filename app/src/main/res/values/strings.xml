@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PodcastChallenge</string>
+
+    <string name="favourited">Favourited</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="back">Back</string>
+
+    <!-- Accessibility -->
+    <string name="accessibility_podcast_image">Cover image for the %1$s podcast</string>
+    <string name="accessibility_back_button">Navigate back</string>
+
 </resources>
