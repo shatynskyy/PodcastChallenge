@@ -11,7 +11,9 @@ import androidx.navigation.compose.rememberNavController
 import com.podcastchallenge.application.navigation.PodcastNavigation
 import com.podcastchallenge.application.navigation.Screen
 import com.podcastchallenge.ui.theme.PodcastChallengeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
