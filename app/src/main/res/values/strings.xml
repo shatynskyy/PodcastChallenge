@@ -2,6 +2,7 @@
     <string name="app_name">PodcastChallenge</string>
 
     <string name="favourited">Favourited</string>
+    <string name="favourite">Favourite</string>
     <string name="podcasts">Podcasts</string>
     <string name="back">Back</string>
 

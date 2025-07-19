@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.podcastchallenge.application.models.PodcastPresentation
 import com.podcastchallenge.application.screens.podcastdetail.PodcastDetailScreen
 import com.podcastchallenge.application.screens.podcastslist.PodcastListScreen
 
@@ -24,7 +25,12 @@ fun PodcastNavigation(
             )
         }
         composable(route = Screen.PodcastDetail.route) {
-            PodcastDetailScreen()
+            PodcastDetailScreen(
+                podcast = PodcastPresentation.mock(),
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
         }
 
     }
