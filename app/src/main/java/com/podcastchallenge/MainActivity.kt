@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.podcastchallenge.application.navigation.PodcastNavigation
 import com.podcastchallenge.application.navigation.Screen
 import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
+import com.podcastchallenge.application.ui.theme.SetSystemBarIcons
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PodcastChallengeTheme {
+                SetSystemBarIcons(darkIcons = true)
                 Surface(
                     Modifier.fillMaxSize()
                 ) {
