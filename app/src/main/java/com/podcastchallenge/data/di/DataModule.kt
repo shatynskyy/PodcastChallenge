@@ -1,10 +1,15 @@
 package com.podcastchallenge.data.di
 
+import android.content.Context
+import androidx.room.Room
 import com.podcastchallenge.data.Endpoints.BASE_URL
 import com.podcastchallenge.data.retrofit.ApiService
+import com.podcastchallenge.data.room.PodcastDao
+import com.podcastchallenge.data.room.RoomDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,6 +53,18 @@ object DataModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): RoomDB {
+        return Room.databaseBuilder(context, RoomDB::class.java, "podcast_database").build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoritesDao(database: RoomDB): PodcastDao {
+        return database.podcastDao()
     }
 
 }
