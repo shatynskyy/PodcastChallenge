@@ -94,4 +94,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit.v121)
     androidTestImplementation(libs.androidx.core)
     androidTestImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 }
