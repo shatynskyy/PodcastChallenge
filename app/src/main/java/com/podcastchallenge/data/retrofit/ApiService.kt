@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiService {
 
     @GET(BEST_PODCASTS_URL)
-    fun getBestPodcasts() : BestPodcastsDTO
+    suspend fun getBestPodcasts() : BestPodcastsDTO
 
 }

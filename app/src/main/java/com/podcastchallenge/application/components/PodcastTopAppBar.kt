@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -63,8 +64,10 @@ fun PodcastTopAppBar(
 
         if (title.isNullOrEmpty().not()){
             Text(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                text = title.orEmpty(),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .semantics{ heading() },
+                text = title,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )

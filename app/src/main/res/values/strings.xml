@@ -5,6 +5,7 @@
     <string name="favourite">Favourite</string>
     <string name="podcasts">Podcasts</string>
     <string name="back">Back</string>
+    <string name="error">Something went wrong</string>
 
     <!-- Accessibility -->
     <string name="accessibility_podcast_image">Cover image for the %1$s podcast</string>
