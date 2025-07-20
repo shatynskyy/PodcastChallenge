@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.podcastchallenge.R
 import com.podcastchallenge.application.components.PodcastTopAppBar
-import com.podcastchallenge.ui.theme.PodcastChallengeTheme
+import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 
 @Composable
 fun PodcastListScreen(

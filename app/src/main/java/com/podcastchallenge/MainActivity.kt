@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.podcastchallenge.application.navigation.PodcastNavigation
 import com.podcastchallenge.application.navigation.Screen
-import com.podcastchallenge.ui.theme.PodcastChallengeTheme
+import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

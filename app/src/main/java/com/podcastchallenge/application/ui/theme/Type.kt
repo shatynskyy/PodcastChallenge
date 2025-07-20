@@ -1,4 +1,4 @@
-package com.podcastchallenge.ui.theme
+package com.podcastchallenge.application.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

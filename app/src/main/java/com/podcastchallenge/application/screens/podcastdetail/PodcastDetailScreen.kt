@@ -30,7 +30,7 @@ import com.podcastchallenge.R
 import com.podcastchallenge.application.components.PodcastAsyncImage
 import com.podcastchallenge.application.components.PodcastTopAppBar
 import com.podcastchallenge.application.models.PodcastPresentation
-import com.podcastchallenge.ui.theme.PodcastChallengeTheme
+import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 
 @Composable
 fun PodcastDetailScreen(
