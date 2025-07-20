@@ -30,6 +30,7 @@ import com.podcastchallenge.R
 import com.podcastchallenge.application.components.PodcastAsyncImage
 import com.podcastchallenge.application.components.PodcastTopAppBar
 import com.podcastchallenge.application.models.PodcastPresentation
+import com.podcastchallenge.application.ui.components.HtmlText
 import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 
 @Composable
@@ -56,7 +57,8 @@ fun PodcastDetailScreen(
                 Text(
                     text = title,
                     fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
                 )
                 Text(
                     text = publisher,
@@ -90,10 +92,9 @@ fun PodcastDetailScreen(
                         fontSize = 18.sp,
                     )
                 }
-                Text(
+                HtmlText(
                     modifier = Modifier.padding(16.dp),
-                    text = description,
-                    textAlign = TextAlign.Center
+                    html = description
                 )
             }
         }
