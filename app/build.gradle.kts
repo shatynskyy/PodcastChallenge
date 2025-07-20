@@ -80,4 +80,7 @@ dependencies {
 
     //GSON
     implementation(libs.gson.converter)
+
+    //Paging
+    implementation(libs.androidx.paging.compose)
 }
