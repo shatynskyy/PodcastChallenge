@@ -2,6 +2,7 @@ package com.podcastchallenge.application.models
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.podcastchallenge.data.models.PodcastDTO
+import com.podcastchallenge.data.room.PodcastEntity
 
 data class PodcastPresentation(
     val id: String,
@@ -26,13 +27,16 @@ data class PodcastPresentation(
     }
 }
 
-fun PodcastDTO.toPodcastPresentation() =
+fun PodcastDTO.toPodcastPresentation(isFavorite: Boolean) =
     PodcastPresentation(
         id = id.orEmpty(),
         title = title.orEmpty(),
         publisher = publisher.orEmpty(),
         description = description.orEmpty(),
-        isFavorite = false,
+        isFavorite = isFavorite,
         thumbnailUrl = thumbnail.orEmpty(),
         imageUrl = image.orEmpty()
     )
+
+fun PodcastPresentation.toPodcastEntity() : PodcastEntity =
+    PodcastEntity(id = id)

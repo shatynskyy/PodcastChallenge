@@ -1,10 +1,7 @@
 package com.podcastchallenge.application.screens.podcastdetail
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,6 +11,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,10 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.podcastchallenge.R
-import com.podcastchallenge.application.components.PodcastAsyncImage
-import com.podcastchallenge.application.components.PodcastTopAppBar
+import com.podcastchallenge.application.ui.components.PodcastAsyncImage
+import com.podcastchallenge.application.ui.components.PodcastTopAppBar
 import com.podcastchallenge.application.models.PodcastPresentation
+import com.podcastchallenge.application.screens.podcastdetail.PodcastDetailEvents.*
 import com.podcastchallenge.application.ui.components.HtmlText
 import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 
@@ -38,6 +40,30 @@ fun PodcastDetailScreen(
     podcast: PodcastPresentation,
     onNavigateBack: () -> Unit
 ) {
+    val viewModel: PodcastDetailViewModel = hiltViewModel()
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.onDispatch(CheckIfFavorite(podcast.id))
+    }
+
+    PodcastDetailContent(
+        podcast = podcast,
+        state = state,
+        onToggleFavorite = {
+            viewModel.onDispatch(ToggleFavorite(podcast))
+        },
+        onNavigateBack = onNavigateBack
+    )
+}
+
+@Composable
+fun PodcastDetailContent(
+    podcast: PodcastPresentation,
+    state: PodcastDetailState,
+    onToggleFavorite: () -> Unit,
+    onNavigateBack: () -> Unit
+){
     Scaffold(
         topBar = {
             PodcastTopAppBar(
@@ -48,13 +74,14 @@ fun PodcastDetailScreen(
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding),
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             podcast.apply {
-                Spacer(modifier = Modifier.height(32.dp))
                 Text(
+                    modifier = Modifier.padding(top = 24.dp),
                     text = title,
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
@@ -69,11 +96,8 @@ fun PodcastDetailScreen(
                 PodcastAsyncImage(
                     imageUrl = imageUrl,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            vertical = 16.dp,
-                            horizontal = 48.dp
-                        )
+                        .padding(horizontal = 64.dp)
+                        .padding(vertical = 24.dp)
                         .clip(RoundedCornerShape(12.dp)),
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(R.string.accessibility_podcast_image, title)
@@ -83,17 +107,22 @@ fun PodcastDetailScreen(
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Red.copy(alpha = .7f)
                     ),
-                    onClick = { },
+                    onClick = onToggleFavorite,
                 ) {
                     Text(
+                        modifier = Modifier.padding(vertical = 4.dp),
                         text = stringResource(
-                            if (isFavorite) R.string.favourited else R.string.favourite
+                            if (state.isFavorite) R.string.favourited else R.string.favourite
                         ),
                         fontSize = 18.sp,
                     )
                 }
                 HtmlText(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier
+                        .padding(
+                            top = 24.dp,
+                            bottom = 16.dp
+                        ),
                     html = description
                 )
             }
@@ -105,9 +134,11 @@ fun PodcastDetailScreen(
 @Composable
 fun PodcastDetailScreenPreview(){
     PodcastChallengeTheme {
-        PodcastDetailScreen(
-            podcast = PodcastPresentation.mock(isFavorite = false),
-            onNavigateBack = { }
+        PodcastDetailContent(
+            podcast = PodcastPresentation.mock(),
+            state = PodcastDetailState(isFavorite = true),
+            onNavigateBack = {},
+            onToggleFavorite = {}
         )
     }
 }

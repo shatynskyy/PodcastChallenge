@@ -1,4 +1,4 @@
-package com.podcastchallenge.application.components
+package com.podcastchallenge.application.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

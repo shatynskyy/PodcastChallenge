@@ -16,21 +16,22 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.podcastchallenge.R
-import com.podcastchallenge.application.components.PodcastErrorComponent
+import com.podcastchallenge.application.ui.components.PodcastErrorComponent
 import com.podcastchallenge.application.components.PodcastItem
-import com.podcastchallenge.application.components.PodcastLoader
-import com.podcastchallenge.application.components.PodcastTopAppBar
+import com.podcastchallenge.application.ui.components.PodcastTopAppBar
 import com.podcastchallenge.application.models.PodcastPresentation
 import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 import kotlinx.coroutines.flow.MutableStateFlow
+import com.podcastchallenge.R
+import com.podcastchallenge.application.ui.components.PodcastLoader
 
 @Composable
 fun PodcastListScreen(
     onNavigateToDetails: (PodcastPresentation) -> Unit
 ){
     val viewModel: PodcastListViewModel = hiltViewModel()
-    val podcastListPagingState = viewModel.bestPodcastFlow.collectAsLazyPagingItems()
+    val podcastListPagingState = viewModel.podcastsPagingFlow.collectAsLazyPagingItems()
+
     PodcastListContent(
         podcastListPagingState = podcastListPagingState,
         onNavigateToDetails = onNavigateToDetails
@@ -56,52 +57,51 @@ fun PodcastListContent(
         ) {
             items(podcastListPagingState.itemCount){index ->
                 val podcast = podcastListPagingState[index]
-                podcast?.let { podcast ->
+                podcast?.let {
                     PodcastItem(
-                        title = podcast.title,
-                        publisher = podcast.publisher,
-                        thumbnailUrl = podcast.thumbnailUrl,
-                        isFavorite = podcast.isFavorite,
-                        onClick = { onNavigateToDetails(podcast) }
+                        title = it.title,
+                        publisher = it.publisher,
+                        thumbnailUrl = it.thumbnailUrl,
+                        isFavorite = it.isFavorite,
+                        onClick = {
+                            onNavigateToDetails(it)
+                        }
                     )
                 }
             }
 
-            podcastListPagingState.apply {
-                when {
-                    loadState.refresh is LoadState.Loading -> {
-                        item {
-                            PodcastLoader(modifier = Modifier.fillMaxSize())
-                        }
-                    }
-
-                    loadState.refresh is LoadState.Error -> {
-                        item {
-                            PodcastErrorComponent(modifier = Modifier.fillMaxSize())
-                        }
-                    }
-
-                    loadState.append is LoadState.Loading -> {
-                        item {
-                            PodcastLoader(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 16.dp)
-                            )
-                        }
-                    }
-
-                    loadState.append is LoadState.Error -> {
-                        item {
-                            PodcastErrorComponent(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 16.dp)
-                            )
-                        }
-                    }
+            if (podcastListPagingState.loadState.append is LoadState.Loading) {
+                item {
+                    PodcastLoader(modifier = Modifier
+                        .padding(vertical = 16.dp)
+                        .fillMaxWidth()
+                    )
                 }
             }
+
+            if (podcastListPagingState.loadState.append is LoadState.Error) {
+                item {
+                    PodcastErrorComponent(
+                        modifier = Modifier
+                            .padding(vertical = 16.dp)
+                            .fillMaxWidth()
+                    )
+                }
+            }
+        }
+
+        if (podcastListPagingState.loadState.refresh is LoadState.Loading) {
+            PodcastLoader(
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
+
+        if (podcastListPagingState.loadState.refresh is LoadState.Error) {
+            PodcastErrorComponent(
+                modifier = Modifier
+                    .fillMaxSize()
+            )
         }
     }
 }

@@ -16,6 +16,7 @@ fun HtmlText(html: String, modifier: Modifier = Modifier) {
                 text = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)
                 movementMethod = LinkMovementMethod.getInstance()
                 gravity = Gravity.CENTER
+                textSize = 16f
             }
         },
         modifier = modifier

@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.podcastchallenge.R
+import com.podcastchallenge.application.ui.components.PodcastAsyncImage
 import com.podcastchallenge.application.ui.theme.PodcastChallengeTheme
 
 @Composable
@@ -81,7 +82,7 @@ fun PodcastItem(
                 )
             }
         }
-        HorizontalDivider(modifier = Modifier.padding(start = 16.dp), color = Color.LightGray)
+        HorizontalDivider(modifier = Modifier.padding(start = 16.dp), color = Color.LightGray.copy(alpha = .3f))
     }
 }
 

@@ -16,12 +16,13 @@ class RepositoryImpl @Inject constructor(
     private val podcastDao: PodcastDao
 ) : Repository {
 
-    override fun getBestPodcasts(): Flow<PagingData<PodcastDTO>> {
-        val pagingConfig = PagingConfig(pageSize = 20)
-        val pagingSource = PodcastPagingSource(apiService)
+    override fun getBestPodcasts() : Flow<PagingData<PodcastDTO>> {
         return Pager(
-            config = pagingConfig,
-            pagingSourceFactory = { pagingSource }
+            config = PagingConfig(
+                pageSize = 20
+            ),
+            pagingSourceFactory = {
+                PodcastPagingSource(apiService) }
         ).flow
     }
 
