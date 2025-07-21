@@ -5,6 +5,13 @@ import androidx.paging.PagingState
 import com.podcastchallenge.data.models.PodcastDTO
 import com.podcastchallenge.data.retrofit.ApiService
 
+/**
+ * A [PagingSource] implementation that loads podcast data from the remote API.
+ *
+ * - Handles pagination logic (next/previous pages)
+ * - Uses [ApiService.getBestPodcasts] as the data source
+ * - Returns [PodcastDTO] items for consumption by the Paging library
+ */
 class PodcastPagingSource(
     private val apiService: ApiService
 ) : PagingSource<Int, PodcastDTO>() {

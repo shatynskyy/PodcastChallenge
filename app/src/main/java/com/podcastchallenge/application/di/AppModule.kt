@@ -9,6 +9,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
+/**
+ * Provides dependencies scoped to the ViewModel lifecycle using Hilt.
+ *
+ * - The [Repository] is scoped to the ViewModel via [ViewModelComponent]
+ * - This ensures a new instance per ViewModel and proper lifecycle management
+ */
 @Module
 @InstallIn(ViewModelComponent::class)
 object AppModule {

@@ -4,6 +4,11 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.podcastchallenge.data.models.PodcastDTO
 import com.podcastchallenge.data.room.PodcastEntity
 
+/**
+ * UI model representing a podcast item in the app.
+ *
+ * Includes a companion mock generator for previews and testing.
+ */
 data class PodcastPresentation(
     val id: String,
     val title: String,
@@ -27,6 +32,9 @@ data class PodcastPresentation(
     }
 }
 
+/**
+ * Maps PodcastDTO to PodcastPresentation, adding isFavorite flag.
+ */
 fun PodcastDTO.toPodcastPresentation(isFavorite: Boolean) =
     PodcastPresentation(
         id = id.orEmpty(),
@@ -38,5 +46,8 @@ fun PodcastDTO.toPodcastPresentation(isFavorite: Boolean) =
         imageUrl = image.orEmpty()
     )
 
+/**
+ * Maps PodcastPresentation to a database entity.
+ */
 fun PodcastPresentation.toPodcastEntity() : PodcastEntity =
     PodcastEntity(id = id)

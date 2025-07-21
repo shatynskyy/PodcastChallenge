@@ -15,7 +15,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
+/**
+ * Instrumented tests for [PodcastDao] using in-memory Room database.
+ * Validates insert, delete, and favorite status operations.
+ */
 @RunWith(AndroidJUnit4::class)
 class PodcastDaoTest {
 

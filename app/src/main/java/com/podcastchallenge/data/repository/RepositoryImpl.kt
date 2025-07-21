@@ -11,6 +11,13 @@ import com.podcastchallenge.data.room.PodcastEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Implementation of [Repository] that handles data operations.
+ *
+ * - Fetches paginated podcasts from remote API
+ * - Manages favorites using local Room database
+ * - Provides reactive data via [Flow]
+ */
 class RepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val podcastDao: PodcastDao

@@ -17,6 +17,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Provides app-wide singleton dependencies related to networking and local database.
+ *
+ * - Configures OkHttpClient with logging
+ * - Sets up Retrofit for API calls
+ * - Provides Room database and DAO
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {

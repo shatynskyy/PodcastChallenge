@@ -13,6 +13,13 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Unit tests for [RepositoryImpl], which handles podcast data operations
+ * such as fetching best podcasts, managing favorites, and checking favorite status.
+ *
+ * These tests verify that [RepositoryImpl] correctly delegates to [PodcastDao] and
+ * behaves as expected when toggling favorite status.
+ */
 class RepositoryImplTest {
 
     private val apiService: ApiService = mockk()

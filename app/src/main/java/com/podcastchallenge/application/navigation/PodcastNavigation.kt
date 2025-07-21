@@ -11,6 +11,14 @@ import com.podcastchallenge.application.models.PodcastPresentation
 import com.podcastchallenge.application.screens.podcastdetail.PodcastDetailScreen
 import com.podcastchallenge.application.screens.podcastslist.PodcastListScreen
 
+/**
+ * Main navigation graph for the podcast app.
+ *
+ * This sets up navigation between the podcast list screen and the podcast detail screen.
+ *
+ * @param navController the navigation controller used to handle navigation actions
+ * @param startDestination the initial destination when the app launches
+ */
 @Composable
 fun PodcastNavigation(
     navController: NavHostController,

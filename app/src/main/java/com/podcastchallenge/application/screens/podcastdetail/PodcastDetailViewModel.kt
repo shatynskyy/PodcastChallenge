@@ -14,6 +14,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+/**
+ * ViewModel for the Podcast Detail screen.
+ *
+ * Handles state management and user events (MVI pattern).
+ * - Maintains [PodcastDetailState]
+ * - Responds to [PodcastDetailEvents] such as checking and toggling favorites
+ */
 @HiltViewModel
 class PodcastDetailViewModel @Inject constructor(
     private val repository: Repository

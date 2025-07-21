@@ -15,6 +15,13 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * ViewModel for managing and combining podcast list data with favorite status.
+ *
+ * - Collects paginated podcasts from the repository
+ * - Observes favorite podcast IDs
+ * - Combines both flows to produce a list where each item knows if it’s a favorite
+ */
 @HiltViewModel
 class PodcastListViewModel @Inject constructor(
     repository: Repository
